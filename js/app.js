@@ -3,7 +3,7 @@ Enemies
 */
 
 // Enemies our player must avoid 
-var Enemy = function() {
+var Enemy = function(x, y, speed) {
     // Enemy initial position
     this.x = x;
     this.y = y;
@@ -43,10 +43,13 @@ Player
 
 var Player = function() {
     // Player initial position
-    this.x = x;
-    this.y = y;
+    var startingX, startingY;
+    this.startingX = 400;
+    this.startingY = 200;
+    this.x = startingX;
+    this.y = startingY;
     //Loading the player  image
-    this.sprite = 'images/char-pink-girl.png';
+    this.sprite = 'images/char-boy.png';
 };
 
 // This functions updates player position on the screen
@@ -90,16 +93,6 @@ Player.prototype.handleInput = function(allowedKeys) {
 };
 
 
-
-
-
-
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
-
-
-
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
@@ -112,3 +105,31 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+
+
+
+/*****************************************************************************************************************/
+
+/*
+Instantiate objects
+*/
+
+var player = new Player();
+
+var allEnemies = [];
+
+// Instantiate all enemies (set to 3) with random speed, push to allEnemies array
+for (var i = 0; i < 3; i++) {
+    //startSpeed is a random number from 1-10 times speedMultiplier
+    var speed = Math.floor(Math.random() * 10 + 1);
+    //enemys start off canvas (x = -100) at the following Y positions: 60, 145, 230
+    allEnemies.push(new Enemy(-100, 60 + (85 * i), speed));
+}
+
+
+
+
+
+
+
