@@ -17,16 +17,16 @@ var Enemy = function(x, y, speed) {
 // This function updates the enemy's position during the game (the enemies "move" on the screen)
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // Any movement is multiplied by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-    // We use the formula from Phisycs to keep track of the position
-    // In other words:  position = orginal-position + (velocity)*(time variation)
-
-    //updates position
+    // Any movement is multiplied by the dt parameter which will ensure the game runs at the same speed for all computers.
+    // To update the position, we use the formula  position = orginal_position + (velocity)*(time variation)
     this.x = this.x + this.speed * dt;
-
-    // TODO : Handle collision with the player
+ 
+    // After the bugs go off screen they will appear again on the left 
+    this.offScreenX = 505;
+    this.startingX = -100;
+    if (this.x >= this.offScreenX) {
+        this.x = this.startingX;
+    }
 
 };
 
@@ -43,11 +43,6 @@ Player
 
 var Player = function(x,y) {
     // Player initial position
-    /*var startingX, startingY;
-    this.startingX = 400;
-    this.startingY = 200;
-    this.x = startingX;
-    this.y = startingY;*/
     this.x = x;
     this.y = y;
     //Loading the player  image
@@ -122,12 +117,14 @@ var player = new Player(200,400);
 
 var allEnemies = [];
 
+var speedMultiplier = 5;
+
 // Instantiate all enemies (set to 3) with random speed, push to allEnemies array
 for (var i = 0; i < 3; i++) {
     //startSpeed is a random number from 1-10 times speedMultiplier
-    var speed = Math.floor(Math.random() * 10 + 1);
+    var startSpeed = speedMultiplier*Math.floor(Math.random() * 10 + 1);
     //enemys start off canvas (x = -100) at the following Y positions: 60, 145, 230
-    allEnemies.push(new Enemy(-100, 60 + (85 * i), speed));
+    allEnemies.push(new Enemy(-100, 60 + (85 * i), startSpeed));
 }
 
 
