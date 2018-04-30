@@ -89,9 +89,12 @@ Player.prototype.handleInput = function(allowedKeys) {
             }
             break;
         case "up":
-            //check if player reached top of water
+            //check if player reached top of water, if yes then restarts, otherwise keeps going
             if (this.y > 0) {
                 this.y -= 50;
+            } else {
+                player.x = 200; 
+                player.y = 400;
             }
             break;
         case "down":
