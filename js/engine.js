@@ -63,8 +63,8 @@ var Engine = (function(global) {
      * game loop.
      */
     function init() {
-        reset();
         lastTime = Date.now();
+                reset();
         main();
     }
 
@@ -161,7 +161,10 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // noop
+        var now = Date.now(),
+        dt = (now - lastTime) / 1000.0;
+        update(dt);
+        render();
     }
 
     /* Go ahead and load all of the images we know we're going to need to
