@@ -41,20 +41,23 @@ Enemy.prototype.render = function() {
 Player
 */
 
-var Player = function() {
+var Player = function(x,y) {
     // Player initial position
-    var startingX, startingY;
+    /*var startingX, startingY;
     this.startingX = 400;
     this.startingY = 200;
     this.x = startingX;
-    this.y = startingY;
+    this.y = startingY;*/
+    this.x = x;
+    this.y = y;
     //Loading the player  image
     this.sprite = 'images/char-boy.png';
 };
 
 // This functions updates player position on the screen
-Player.prototype.update = function(dt) {
-    this.x = this.x + this.speed * dt;
+Player.prototype.update = function() {
+    this.x = this.x;
+    this.y = this.y;
 };
 
 // Draw the player on the screen
@@ -79,7 +82,7 @@ Player.prototype.handleInput = function(allowedKeys) {
             break;
         case "up":
             //check if player reached top of water
-            if (this.y < 0) {
+            if (this.y > 0) {
                 this.y -= 50;
             }
             break;
@@ -115,7 +118,7 @@ document.addEventListener('keyup', function(e) {
 Instantiate objects
 */
 
-var player = new Player();
+var player = new Player(200,400);
 
 var allEnemies = [];
 
