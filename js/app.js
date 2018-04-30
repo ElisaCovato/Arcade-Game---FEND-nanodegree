@@ -35,10 +35,63 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+/*****************************************************************************************************************/
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+/*
+Player
+*/
+
+var Player = function() {
+    // Player initial position
+    this.x = x;
+    this.y = y;
+    //Loading the player  image
+    this.sprite = 'images/char-pink-girl.png';
+};
+
+// This functions updates player position on the screen
+Player.prototype.update = function(dt) {
+    this.x = this.x + this.speed * dt;
+};
+
+// Draw the player on the screen
+Player.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+// this fucntion handles the input method : pressind the arrows on the keyboard the player can move the character on the screen
+Player.prototype.handleInput = function(allowedKeys) {
+    switch (allowedKeys) {
+        case "left":
+            //check for wall, otherwise move left
+            if (this.x > 0) {
+                this.x -= 50;
+            }
+            break;
+        case "right":
+            //check for wall, otherwise move right
+            if (this.x < 400) {
+                this.x += 50;
+            }
+            break;
+        case "up":
+            //check if player reached top of water
+            if (this.y < 0) {
+                this.y -= 50;
+            }
+            break;
+        case "down":
+            //check for bottom, otherwise move down
+            if (this.y < 400) {
+                this.y += 50;
+            }
+            break;
+    }
+};
+
+
+
+
 
 
 // Now instantiate your objects.
