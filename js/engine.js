@@ -79,7 +79,31 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        checkCollisions();
+    }
+
+   function checkCollisions() {
+
+    allEnemies.forEach(function(enemy) {
+
+        // creates a virtual box around the enemies
+       var enemyLeft = enemy.x + 2;
+        var enemyRight = enemy.x + 96;
+        var enemyTop = enemy.y + 80;
+        var enemyBottom = enemy.y + 140;
+
+        // creates a virtual box around the player
+        var playerLeft = player.x + 18;
+        var playerRight = player.x + 84;
+        var playerTop = player.y + 64;
+        var playerBottom = player.y + 139;
+
+        // when the two virtual box intersect we restrart the player position
+        if ( enemyRight > playerLeft && enemyLeft < playerRight && enemyBottom > playerTop && enemyTop < playerBottom) {
+            player.x=200; 
+            player.y=400;
+        };
+    })
     }
 
     /* This is called by the update function and loops through all of the

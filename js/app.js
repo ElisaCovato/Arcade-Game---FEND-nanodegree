@@ -30,7 +30,7 @@ Enemy.prototype.update = function(dt) {
     }
 
     // Handle collisions bugs-character
-    
+
 
 };
 
