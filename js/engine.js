@@ -64,7 +64,7 @@ var Engine = (function(global) {
      */
     function init() {
         lastTime = Date.now();
-                reset();
+        reset();
         main();
     }
 
