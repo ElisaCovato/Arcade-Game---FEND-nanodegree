@@ -14,18 +14,27 @@ var Enemy = function() {
 };
 
 
-// Update the enemy's position, required method for game
+// This function updates the enemy's position during the game (the enemies "move" on the screen)
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
+    // Any movement is multiplied by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    // We use the formula from Phisycs to keep track of the position
+    // In other words:  position = orginal-position + (velocity)*(time variation)
+
+    //updates position
+    this.x = this.x + this.speed * dt;
+
+    // TODO : Handle collision with the player
+
 };
 
-// Draw the enemy on the screen, required method for game
+// Draw the enemy on the screen
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
+
 
 // Now write your own player class
 // This class requires an update(), render() and
