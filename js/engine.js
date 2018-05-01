@@ -89,13 +89,13 @@ var Engine = (function(global) {
         // creates a virtual box around the enemies
        var enemyLeft = enemy.x + 2;
         var enemyRight = enemy.x + 96;
-        var enemyTop = enemy.y + 80;
+        var enemyTop = enemy.y + 70;
         var enemyBottom = enemy.y + 140;
 
         // creates a virtual box around the player
         var playerLeft = player.x + 18;
         var playerRight = player.x + 84;
-        var playerTop = player.y + 64;
+        var playerTop = player.y + 50;
         var playerBottom = player.y + 139;
 
         // when the two virtual box intersect we restrart the player position
