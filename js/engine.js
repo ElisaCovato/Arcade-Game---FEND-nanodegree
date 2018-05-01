@@ -100,6 +100,7 @@ var Engine = (function(global) {
         if ( enemyRight > playerLeft && enemyLeft < playerRight && enemyBottom > playerTop && enemyTop < playerBottom) {
             player.x=200; 
             player.y=400;
+
         };
     });
     }
@@ -198,9 +199,52 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        'images/char-cat-girl.png',
+        'images/char-horn-girl.png',
+        'images/char-pink-girl.png',
+        'images/char-princess-girl.png'
     ]);
-    Resources.onReady(init);
+    // This function creates a div block containing all the characters the player can choose 
+    function characterBlock() {
+        let charBlock = document.createElement("div");
+        let characters = document.querySelector(".characters");
+        charBlock.appendChild(characters.content.cloneNode(true));
+        return charBlock;
+    }
+    
+
+
+    // This function make you choose a character
+    function chooseCharacter() {
+        let charBlock = characterBlock();
+        swal({
+            title: "Choose a character",
+            button: "Start",
+            closeOnEsc: false,
+            closeOnClickOutside: false,
+            content: charBlock,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                init();
+            }
+        });    
+        // When a character is clicked/selected, we get the src of the image and updated the sprite of the player
+        var characters = document.querySelector('.characters');
+        var selectedBefore = null;
+        charBlock.addEventListener('click', function(event) {
+            if (event.target.matches(".charElement") && !event.target.matches(".charSelected")) {
+                if (selectedBefore !== null) {
+                    selectedBefore.classList.remove("charSelected");
+                };
+                event.target.classList.add("charSelected");
+                selectedBefore = event.target;
+                player.sprite = event.target.getAttribute("src");            
+            }
+        });
+    }
+
+    Resources.onReady(chooseCharacter);
 
     /* Assign the canvas' context object to the global variable (the window
      * object when run in a browser) so that developers can use it more easily
@@ -208,3 +252,18 @@ var Engine = (function(global) {
      */
     global.ctx = ctx;
 })(this);
+
+
+
+
+/*****************************************************************************************************************/
+
+/*
+Modals
+*/
+
+/*Choose your character modal*/
+
+
+
+

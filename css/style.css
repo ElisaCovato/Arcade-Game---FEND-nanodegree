@@ -99,3 +99,48 @@ body {
 .restart i {
     color: #7840a5;
 }
+
+/*
+MODALS
+*/
+
+/*General modal style*/
+.swal-button--confirm {
+    background-color: #02ccba;
+}
+
+.swal-title,
+.swal-text {
+    color: #2e4b85;
+}
+
+/* Character modal */
+button {
+	padding:0;
+	overflow: hidden;
+	background-color: white;
+    border: 0;
+    margin-top: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+button:first-child {
+	margin-left: 0;
+}
+
+button:hover {
+	background-color: LightGrey;
+}
+
+.charElement {
+	cursor: pointer;
+	margin-top: -40px;
+	margin-bottom: -20px;
+}
+
+.charSelected {
+	background-color: #02ccba; 
+}
