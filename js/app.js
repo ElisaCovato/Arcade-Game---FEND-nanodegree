@@ -139,6 +139,48 @@ for (var i = 0; i < 3; i++) {
 }
 
 
+/*****************************************************************************************************************/
+
+/*
+ * RESTART the game
+ */
+
+// If the restart button is clicked a modal appears askign the player to restart or keep playing
+// const restart = document.querySelector(".restart");
+// restart.addEventListener('click', function() {
+//     console.log("ciao");
+// });
+
+// // This function shows a warning sweet alert when pressing the restart button
+// function warningModal() {
+//     swal({
+//         title: "Are you sure?",
+//         text: "Your progresses will be lost!",
+//         icon: "warning",
+//         closeOnEsc: false,
+//         closeOnClickOutside: false,
+//         buttons: {
+//             cancel: "Cancel",
+//             confirm: {
+//                 text: "Yes, restart",
+//                 value: "restart",
+//             },
+//         }
+//     }).then((value) => {
+//         switch (value) {
+//             case "restart":
+//                 init();
+//                 break;
+//             default:
+//                 break;
+//         }
+//     });
+// }
+
+
+
+
+
 
 
 
