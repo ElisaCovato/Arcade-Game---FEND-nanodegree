@@ -83,27 +83,25 @@ var Engine = (function(global) {
     }
 
    function checkCollisions() {
+    //creates a virtual rectangular box around the player 
+        var playerLeft = player.x + 10;
+        var playerRight = player.x + 70;
+        var playerTop = player.y + 50;
+        var playerBottom = player.y + 120;
 
     allEnemies.forEach(function(enemy) {
-
-        // creates a virtual box around the enemies
-       var enemyLeft = enemy.x + 2;
-        var enemyRight = enemy.x + 96;
+        // creates a virtual rectangular box around the enemies
+        var enemyLeft = enemy.x + 2;
+        var enemyRight = enemy.x + 90;
         var enemyTop = enemy.y + 70;
-        var enemyBottom = enemy.y + 140;
-
-        // creates a virtual box around the player
-        var playerLeft = player.x + 18;
-        var playerRight = player.x + 84;
-        var playerTop = player.y + 50;
-        var playerBottom = player.y + 139;
+        var enemyBottom = enemy.y + 100;
 
         // when the two virtual box intersect we restrart the player position
         if ( enemyRight > playerLeft && enemyLeft < playerRight && enemyBottom > playerTop && enemyTop < playerBottom) {
             player.x=200; 
             player.y=400;
         };
-    })
+    });
     }
 
     /* This is called by the update function and loops through all of the

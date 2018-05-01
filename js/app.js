@@ -28,10 +28,6 @@ Enemy.prototype.update = function(dt) {
         this.x = this.startingX;
         this.speed = randomSpeed();
     }
-
-    // Handle collisions bugs-character
-
-
 };
 
 // This function creates random speeds for the bugs
