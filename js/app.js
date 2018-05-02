@@ -89,6 +89,7 @@ Player.prototype.handleInput = function(allowedKeys) {
             if (this.y > 0) {
                 this.y -= 50;
             } else {
+                levelUp();
                 player.x = 200; 
                 player.y = 400;
             }
@@ -141,42 +142,40 @@ for (var i = 0; i < 3; i++) {
 
 /*****************************************************************************************************************/
 
+
+
 /*
- * RESTART the game
+ * LEVEL UP
  */
+let  pointScore = 0;
+let  levelScore = 1;
+const levelUpPointsIncrement = 100;
+const points = document.querySelector(".points");
+const  overlayLevelUp = document.querySelector(".overlayLevelUp");
+const levels = document.querySelector(".levels");
 
-// If the restart button is clicked a modal appears askign the player to restart or keep playing
-// const restart = document.querySelector(".restart");
-// restart.addEventListener('click', function() {
-//     console.log("ciao");
-// });
 
-// // This function shows a warning sweet alert when pressing the restart button
-// function warningModal() {
-//     swal({
-//         title: "Are you sure?",
-//         text: "Your progresses will be lost!",
-//         icon: "warning",
-//         closeOnEsc: false,
-//         closeOnClickOutside: false,
-//         buttons: {
-//             cancel: "Cancel",
-//             confirm: {
-//                 text: "Yes, restart",
-//                 value: "restart",
-//             },
-//         }
-//     }).then((value) => {
-//         switch (value) {
-//             case "restart":
-//                 init();
-//                 break;
-//             default:
-//                 break;
-//         }
-//     });
-// }
+// The following two functions make an overlay appear/disappear
+function onOverlay(overlay) {
+    overlay.style.display = "block";
+}
 
+function offOverlay(overlay) {
+    overlay.style.display = "none";
+}
+
+
+
+function levelUp() {
+    levelScore += 1;
+    onOverlay(overlayLevelUp);
+    setInterval( function() {
+        offOverlay(overlayLevelUp);
+    }, 900);
+    pointScore += levelUpPointsIncrement;
+    points.innerHTML = pointScore;
+    levels.innerHTML = levelScore;
+}
 
 
 

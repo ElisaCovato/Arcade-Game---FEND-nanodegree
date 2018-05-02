@@ -24,6 +24,12 @@ var Engine = (function(global) {
         ctx = canvas.getContext('2d'),
         lastTime;
 
+
+
+    const  overlayCollisions = document.querySelector(".overlayCollisions");
+    const  overlayLevelUp = document.querySelector(".overlayLevelUp");
+
+
     canvas.width = 505;
     canvas.height = 606;
     doc.body.appendChild(canvas);
@@ -77,12 +83,12 @@ var Engine = (function(global) {
     }
 
     // The following two functions make an overlay appear/disappear
-    function onOverlay() {
-        document.querySelector(".overlayCollisions").style.display = "block";
+    function onOverlay(overlay) {
+        overlay.style.display = "block";
     }
 
-    function offOverlay() {
-        document.querySelector(".overlayCollisions").style.display = "none";
+    function offOverlay(overlay) {
+        overlay.style.display = "none";
     }
 
     //Life points
@@ -90,7 +96,7 @@ var Engine = (function(global) {
     const hearts = document.querySelector(".hearts");
 
     function lifePointsMinus() {
-        if (lifePoints > 1) {
+        if (lifePoints >= 1) {
             hearts.children[lifePoints-1].children[0].classList.replace("fa-heart", "fa-heart-o");
             lifePoints -= 1;            
         } else {
@@ -115,14 +121,16 @@ var Engine = (function(global) {
 
         // when the two virtual box intersect we have the collision
         if ( enemyRight > playerLeft && enemyLeft < playerRight && enemyBottom > playerTop && enemyTop < playerBottom) {
+            if (lifePoints >1 ) {
             // The "oops!" message appears on the screen / An overlay is showns and then it disappears
-            onOverlay();
+            onOverlay(overlayCollisions);
             setInterval( function() {
-                offOverlay();
+                offOverlay(overlayCollisions);
             }, 1000);
             // The player start again from the initial position
             player.x=200; 
             player.y=400;
+        };
             // The player looses life points
             lifePointsMinus();
         };
@@ -359,8 +367,7 @@ function gameOverModal() {
 }
 
     /* Assign the canvas' context object to the global variable (the window
-     * object when run in a browser) so that developers can use it more easily
-     * from within their app.js files.
+     * object when run in a browser).
      */
     global.ctx = ctx;
 })(this);
