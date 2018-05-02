@@ -90,8 +90,12 @@ var Engine = (function(global) {
     const hearts = document.querySelector(".hearts");
 
     function lifePointsMinus() {
-        hearts.children[lifePoints-1].children[0].classList.replace("fa-heart", "fa-heart-o");
-        lifePoints -= 1;
+        if (lifePoints > 1) {
+            hearts.children[lifePoints-1].children[0].classList.replace("fa-heart", "fa-heart-o");
+            lifePoints -= 1;            
+        } else {
+            gameOverModal();
+        };
     }
 
     // This function check for collisions. If there is one, the player re-starts from startinf position and looses life points
@@ -321,10 +325,6 @@ function pauseEnemies() {
  */
 
  // When the player doesn't have more life points, a game over modal appears. The player can then play again
-
- if (lifePoints === 1) {
-    gameOverModal();
- }
 
 function getScore() {
     let points = document.querySelector(".points").cloneNode(true);
