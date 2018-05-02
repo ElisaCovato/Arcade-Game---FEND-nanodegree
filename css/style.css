@@ -138,7 +138,12 @@ MODALS
     color: #2e4b85;
 }
 
-/* Character modal */
+.scoreModal {
+    position: relative;
+    text-align: center;
+}
+
+/* Characters modal */
 button {
 	padding:0;
 	overflow: hidden;
@@ -167,4 +172,14 @@ button:hover {
 
 .charSelected {
 	background-color: #02ccba; 
+}
+
+/*Game over modal*/
+.gameOverModal > .swal-title {
+    color: #f27474;
+}
+
+.gameOverText .swal-title {
+        color : #f27474 !important;
+
 }

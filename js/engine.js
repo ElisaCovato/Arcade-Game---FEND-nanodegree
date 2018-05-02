@@ -69,19 +69,14 @@ var Engine = (function(global) {
     }
 
     /* This function is called by main (our game loop) and itself calls all
-     * of the functions which may need to update entity's data. Based on how
-     * you implement your collision detection (when two entities occupy the
-     * same space, for instance when your character should die), you may find
-     * the need to add an additional function call here. For now, we've left
-     * it commented out - you may or may not want to implement this
-     * functionality this way (you could just implement collision detection
-     * on the entities themselves within your app.js file).
+     * of the functions which may need to update entity's data. 
      */
     function update(dt) {
         updateEntities(dt);
         checkCollisions();
     }
 
+    // The following two functions make an overlay appear/disappear
     function onOverlay() {
         document.querySelector(".overlayCollisions").style.display = "block";
     }
@@ -99,7 +94,7 @@ var Engine = (function(global) {
         lifePoints -= 1;
     }
 
-    // This function check for collisions
+    // This function check for collisions. If there is one, the player re-starts from startinf position and looses life points
    function checkCollisions() {
     //creates a virtual rectangular box around the player 
         var playerLeft = player.x + 10;
@@ -134,8 +129,7 @@ var Engine = (function(global) {
      * objects within your allEnemies array as defined in app.js and calls
      * their update() methods. It will then call the update function for your
      * player object. These update methods should focus purely on updating
-     * the data/properties related to the object. Do your drawing in your
-     * render methods.
+     * the data/properties related to the object. .
      */
     function updateEntities(dt) {
         allEnemies.forEach(function(enemy) {
@@ -204,9 +198,8 @@ var Engine = (function(global) {
         player.render();
     }
 
-    /* This function does nothing but it could have been a good place to
-     * handle game reset states - maybe a new game menu or a game over screen
-     * those sorts of things. It's only called once by the init() method.
+    /* This function reset the game. It is 
+     * only called once by the init() method.
      */
     function reset() {
         var now = Date.now(),
@@ -215,9 +208,9 @@ var Engine = (function(global) {
         render();
     }
 
-    /* Go ahead and load all of the images we know we're going to need to
-     * draw our game level. Then set init as the callback method, so that when
-     * all of these images are properly loaded our game will start.
+    /* It loads all the images., Then set init as the callback method, so that when
+     * all of these images are properly loaded and you choose your 
+     * character, the game will start.
      */
     Resources.load([
         'images/stone-block.png',
@@ -230,6 +223,7 @@ var Engine = (function(global) {
         'images/char-pink-girl.png',
         'images/char-princess-girl.png'
     ]);
+
     // This function creates a div block containing all the characters the player can choose 
     function characterBlock() {
         let charBlock = document.createElement("div");
@@ -237,8 +231,6 @@ var Engine = (function(global) {
         charBlock.appendChild(characters.content.cloneNode(true));
         return charBlock;
     }
-    
-
 
     // This function make you choose a character
     function chooseCharacter() {
@@ -269,12 +261,15 @@ var Engine = (function(global) {
         });
     }
 
+    // This makes you to choose a character and then the game starts
     Resources.onReady(chooseCharacter);
+
+
 /*
  * RESTART the game
  */
 
-// If the restart button is clicked a modal appears askign the player to restart or keep playing
+// If the restart button is clicked a modal appears asking the player to restart or keep playing
 
     const restart = document.querySelector(".restart");
     restart.addEventListener('click', function() {
@@ -319,6 +314,48 @@ function pauseEnemies() {
         allEnemies[i].speed = 0;   
     };
     return enemiesCurrentSpeeds;
+}
+
+/*
+ * GAME OVER
+ */
+
+ // When the player doesn't have more life points, a game over modal appears. The player can then play again
+
+ if (lifePoints === 1) {
+    gameOverModal();
+ }
+
+function getScore() {
+    let points = document.querySelector(".points").cloneNode(true);
+    let levels = document.querySelector(".levels").cloneNode(true);
+    let showScore = document.createElement("div");
+    //let textScore = document.createTextNode("Your score :");
+    //showScore.appendChild(textScore);
+    showScore.appendChild(points);
+    showScore.appendChild(document.createTextNode(" Points"));
+    showScore.appendChild(levels);
+    showScore.appendChild(document.createTextNode(" Level"));
+    showScore.className = "scoreModal";
+    return showScore;
+}
+
+function gameOverModal() {
+    let showScore = getScore();
+     swal({
+        title: "Game Over!",
+        text : "Your score:",
+        icon: "error",
+        closeOnEsc: false,
+        closeOnClickOutside: false,
+        content : showScore,
+        className : "gameOverText",
+        buttons: "Play again!"
+    }).then(function(isConfirm) {
+        if (isConfirm) {
+            location.reload(true);
+        }
+    });
 }
 
     /* Assign the canvas' context object to the global variable (the window
