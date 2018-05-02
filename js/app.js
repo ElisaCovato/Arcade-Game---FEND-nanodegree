@@ -117,6 +117,35 @@ document.addEventListener('keyup', function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
+/*****************************************************************************************************************/
+
+/*
+Heart / lives
+*/
+var Heart = function(x,y) {
+    // heart initial position
+    this.x = x;
+    this.y = y;
+    //Loading heart  image
+    this.sprite = 'images/Heart.png';
+};
+
+// Draw the heart on the screen
+Heart.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+        var heart; 
+
+        function heartsDraw () {
+            if (levelScore%3===0) {
+                let heartX =50*Math.floor(Math.random() * 5 + 1);
+                let heartY =50*Math.floor(Math.random() * 3 + 1);
+                heart = new Heart(heartX,heartY);
+            } else {
+                heart = null;
+            };
+        }
 
 
 
@@ -184,6 +213,9 @@ function levelUp() {
         pointScore += levelUpPointsIncrement;
         points.innerHTML = pointScore;
 
+        // Generates hearts on screen
+        heartsDraw();
+
         // the enemies got an increased in their speed
         speedMultiplier += 7;
         allEnemies = [];
@@ -192,6 +224,11 @@ function levelUp() {
         winningModal();
     }
 }
+
+
+
+
+
 
 /*****************************************************************************************************************/
 

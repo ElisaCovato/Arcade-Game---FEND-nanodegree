@@ -199,6 +199,10 @@ var Engine = (function(global) {
         });
 
         player.render();
+
+        if (heart) {
+            heart.render();
+        };
     }
 
     /* This function reset the game. It is 
@@ -216,15 +220,21 @@ var Engine = (function(global) {
      * character, the game will start.
      */
     Resources.load([
+        // blocks
         'images/stone-block.png',
         'images/water-block.png',
         'images/grass-block.png',
+        // enemies
         'images/enemy-bug.png',
+        // characters
         'images/char-boy.png',
         'images/char-cat-girl.png',
         'images/char-horn-girl.png',
         'images/char-pink-girl.png',
-        'images/char-princess-girl.png'
+        'images/char-princess-girl.png',
+        //collectables
+        'images/Rock.png', // it stops the character
+        'images/Heart.png' // gives life points
     ]);
 
     // This function creates a div block containing all the characters the player can choose 
