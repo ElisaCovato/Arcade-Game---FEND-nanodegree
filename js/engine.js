@@ -82,6 +82,14 @@ var Engine = (function(global) {
         checkCollisions();
     }
 
+    function onOverlay() {
+        document.querySelector(".overlayCollisions").style.display = "block";
+    }
+
+    function offOverlay() {
+        document.querySelector(".overlayCollisions").style.display = "none";
+    }
+
    function checkCollisions() {
     //creates a virtual rectangular box around the player 
         var playerLeft = player.x + 10;
@@ -96,11 +104,18 @@ var Engine = (function(global) {
         var enemyTop = enemy.y + 70;
         var enemyBottom = enemy.y + 100;
 
-        // when the two virtual box intersect we restrart the player position
+        // when the two virtual box intersect we have the collision
         if ( enemyRight > playerLeft && enemyLeft < playerRight && enemyBottom > playerTop && enemyTop < playerBottom) {
+            // The "oops!" message appears on the screen / An overlay is showns and then it disappears
+            onOverlay();
+            setInterval( function() {
+                offOverlay();
+            }, 1000);
+            // The player start again from the initial position
             player.x=200; 
             player.y=400;
-
+            // The player looses life points
+            
         };
     });
     }
