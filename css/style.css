@@ -190,11 +190,13 @@ button:hover {
 }
 
 /*Game over modal*/
-.gameOverModal > .swal-title {
-    color: #f27474;
-}
-
 .gameOverText .swal-title {
         color : #f27474 !important;
+
+}
+
+/*Winning modal*/
+.winningText .swal-title {
+        color : #02ccba !important;
 
 }

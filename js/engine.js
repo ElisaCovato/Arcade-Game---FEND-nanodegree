@@ -27,7 +27,7 @@ var Engine = (function(global) {
 
 
     const  overlayCollisions = document.querySelector(".overlayCollisions");
-    const  overlayLevelUp = document.querySelector(".overlayLevelUp");
+
 
 
     canvas.width = 505;
@@ -80,15 +80,6 @@ var Engine = (function(global) {
     function update(dt) {
         updateEntities(dt);
         checkCollisions();
-    }
-
-    // The following two functions make an overlay appear/disappear
-    function onOverlay(overlay) {
-        overlay.style.display = "block";
-    }
-
-    function offOverlay(overlay) {
-        overlay.style.display = "none";
     }
 
     //Life points
@@ -328,43 +319,7 @@ function pauseEnemies() {
     return enemiesCurrentSpeeds;
 }
 
-/*
- * GAME OVER
- */
 
- // When the player doesn't have more life points, a game over modal appears. The player can then play again
-
-function getScore() {
-    let points = document.querySelector(".points").cloneNode(true);
-    let levels = document.querySelector(".levels").cloneNode(true);
-    let showScore = document.createElement("div");
-    //let textScore = document.createTextNode("Your score :");
-    //showScore.appendChild(textScore);
-    showScore.appendChild(points);
-    showScore.appendChild(document.createTextNode(" Points"));
-    showScore.appendChild(levels);
-    showScore.appendChild(document.createTextNode(" Level"));
-    showScore.className = "scoreModal";
-    return showScore;
-}
-
-function gameOverModal() {
-    let showScore = getScore();
-     swal({
-        title: "Game Over!",
-        text : "Your score:",
-        icon: "error",
-        closeOnEsc: false,
-        closeOnClickOutside: false,
-        content : showScore,
-        className : "gameOverText",
-        buttons: "Play again!"
-    }).then(function(isConfirm) {
-        if (isConfirm) {
-            location.reload(true);
-        }
-    });
-}
 
     /* Assign the canvas' context object to the global variable (the window
      * object when run in a browser).

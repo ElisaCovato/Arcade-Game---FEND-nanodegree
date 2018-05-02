@@ -31,7 +31,7 @@ Enemy.prototype.update = function(dt) {
 };
 
 // This function creates random speeds for the bugs
-var speedMultiplier = 5;
+var speedMultiplier = 10;
 
 function randomSpeed() {
      //startSpeed is a random number from 1-10 times speedMultiplier
@@ -133,11 +133,15 @@ var allEnemies = [];
 
 
 // Instantiate all enemies (set to 3) with random speed, push to allEnemies array
-for (var i = 0; i < 3; i++) {
+function allEnemiesDraw() {
+    for (var i = 0; i < 3; i++) {
     //enemys start off canvas (x = -100) at the following Y positions: 60, 145, 230
     var startSpeed = randomSpeed();
     allEnemies.push(new Enemy(-100, 60 + (85 * i), startSpeed));
+    }    
 }
+allEnemiesDraw();
+
 
 
 /*****************************************************************************************************************/
@@ -167,20 +171,106 @@ function offOverlay(overlay) {
 
 
 function levelUp() {
-    levelScore += 1;
-    onOverlay(overlayLevelUp);
-    setInterval( function() {
-        offOverlay(overlayLevelUp);
-    }, 900);
-    pointScore += levelUpPointsIncrement;
-    points.innerHTML = pointScore;
-    levels.innerHTML = levelScore;
+    if (levelScore < 10) {
+        // level up
+        levelScore += 1;
+        levels.innerHTML = levelScore;
+        // the "geat!" overlay appears
+        onOverlay(overlayLevelUp);
+        setInterval( function() {
+            offOverlay(overlayLevelUp);
+        }, 900);
+        // we increment the points
+        pointScore += levelUpPointsIncrement;
+        points.innerHTML = pointScore;
+
+        // the enemies got an increased in their speed
+        speedMultiplier += 7;
+        allEnemies = [];
+        allEnemiesDraw();
+    } else {
+        winningModal();
+    }
+}
+
+/*****************************************************************************************************************/
+
+
+/*
+ * GAME OVER
+ */
+
+ // When the player doesn't have more life points, a game over modal appears. The player can then play again
+
+function getScore() {
+    let points = document.querySelector(".points").cloneNode(true);
+    let levels = document.querySelector(".levels").cloneNode(true);
+    let showScore = document.createElement("div");
+    showScore.appendChild(points);
+    showScore.appendChild(document.createTextNode(" Points"));
+    showScore.appendChild(levels);
+    showScore.appendChild(document.createTextNode(" Level"));
+    showScore.className = "scoreModal";
+    return showScore;
+}
+
+function gameOverModal() {
+    let showScore = getScore();
+     swal({
+        title: "Game Over!",
+        text : "Your score:",
+        icon: "error",
+        closeOnEsc: false,
+        closeOnClickOutside: false,
+        content : showScore,
+        className : "gameOverText",
+        buttons: "Play again!"
+    }).then(function(isConfirm) {
+        if (isConfirm) {
+            location.reload(true);
+        }
+    });
 }
 
 
 
+/*****************************************************************************************************************/
 
 
+
+/*
+ * Winning
+ */
+ // When the player reaches level 10 a winning modal appear asking the player if wants to plays again
+
+
+function getScoreWinning() {
+    let points = document.querySelector(".points").cloneNode(true);
+    let showScore = document.createElement("div");
+    let textScore = document.createTextNode("Your score : ");
+    showScore.appendChild(textScore);
+    showScore.appendChild(points);
+    showScore.appendChild(document.createTextNode(" Points"));
+    showScore.className = "scoreModal";
+    return showScore;
+}
+
+function winningModal() {
+    let showScore = getScoreWinning();
+     swal({
+        title: "Congratulations! You won!",
+        icon: "success",
+        closeOnEsc: false,
+        closeOnClickOutside: false,
+        content : showScore,
+        className : "winningText",
+        buttons: "Play again!"
+    }).then(function(isConfirm) {
+        if (isConfirm) {
+            location.reload(true);
+        }
+    });
+}
 
 
 
