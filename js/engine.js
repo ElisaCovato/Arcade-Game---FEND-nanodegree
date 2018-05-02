@@ -90,6 +90,16 @@ var Engine = (function(global) {
         document.querySelector(".overlayCollisions").style.display = "none";
     }
 
+    //Life points
+    let lifePoints = 3;
+    const hearts = document.querySelector(".hearts");
+
+    function lifePointsMinus() {
+        hearts.children[lifePoints-1].children[0].classList.replace("fa-heart", "fa-heart-o");
+        lifePoints -= 1;
+    }
+
+    // This function check for collisions
    function checkCollisions() {
     //creates a virtual rectangular box around the player 
         var playerLeft = player.x + 10;
@@ -115,7 +125,7 @@ var Engine = (function(global) {
             player.x=200; 
             player.y=400;
             // The player looses life points
-            
+            lifePointsMinus();
         };
     });
     }
