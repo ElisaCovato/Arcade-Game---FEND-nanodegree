@@ -132,20 +132,46 @@ var Heart = function(x,y) {
 
 // Draw the heart on the screen
 Heart.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 70.7, 119.7);
+};
+
+ 
+
+
+
+/*****************************************************************************************************************/
+
+/*
+Gems
+*/
+
+var Gem = function(x, y) {
+    this.x = x;
+    this.y = y;
+    this.sprite = 'images/Gem-Orange.png';
+    this.gemColor = 1; //orange-gold
+    this.worth = 50; // score 
+};
+
+// Draw the Gem on screen.
+Gem.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-        var heart; 
+//Changing color/score for a gem.
+// Gem.prototype.changeColor = function() {
+//     if (this.gemColor === 1) {
+//         this.sprite = 'images/Gem-Green.png';
+//         this.gemColor = 2; // green
+//         this.worth = 30;
+//     }
+//     else {
+//         this.sprite = 'images/Gem-Blue.png';
+//         this.gemColor = 3; // blue
+//         this.worth = 10;
+//     }
+// };
 
-        function heartsDraw () {
-            if (levelScore%3===0) {
-                let heartX =50*Math.floor(Math.random() * 5 + 1);
-                let heartY =50*Math.floor(Math.random() * 3 + 1);
-                heart = new Heart(heartX,heartY);
-            } else {
-                heart = null;
-            };
-        }
 
 
 
@@ -158,6 +184,48 @@ Instantiate objects
 var player = new Player(200,400);
 
 var allEnemies = [];
+
+var allGems = [];
+
+var heart; 
+
+// this function generates a random x position
+function randomCordX() {
+    var cordX = 100*Math.floor(Math.random() * 5 )+18;
+    return cordX;
+}
+// this function generates a random y position
+function randomCordY() {
+    var cordY = 100*Math.floor(Math.random() * 2+1 )-10;
+    return cordY;
+}
+
+
+function gemsDraw() {
+    if (levelScore > 2) {
+        var rand1X = randomCordX();
+        var rand1Y = randomCordY();
+        allGems.push(new Gem(rand1X, rand1Y));
+        // if (levelScore > 7) {
+        //     allGems.push(new Gem(randomCordX(), randomCordY() ) );
+        //     if (levelScore>9) {
+        //         allGems.push(new Gem(randomCordX(), randomCordY() ) );
+        //     };
+        // };
+    };
+}
+
+
+function heartsDraw () {
+    if (levelScore%3===0) {
+        var heartX = randomCordX;
+        var heartY = randomCordY;
+        heart = new Heart(heartX,heartY);
+    } else {
+        heart = null;
+    };
+}
+
 
 
 
@@ -215,6 +283,9 @@ function levelUp() {
 
         // Generates hearts on screen
         heartsDraw();
+
+        // Generates gems on screen
+        gemsDraw();
 
         // the enemies got an increased in their speed
         speedMultiplier += 7;

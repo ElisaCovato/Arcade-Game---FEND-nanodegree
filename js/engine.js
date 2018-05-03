@@ -95,6 +95,13 @@ var Engine = (function(global) {
         };
     }
 
+    function lifePointsPlus() {
+        if (lifePoints <3 ) {
+            hearts.children[lifePoints].children[0].classList.replace("fa-heart-o", "fa-heart");
+            lifePoints += 1;            
+        }
+    }
+
     // This function check for collisions. If there is one, the player re-starts from startinf position and looses life points
    function checkCollisions() {
     //creates a virtual rectangular box around the player 
@@ -103,6 +110,14 @@ var Engine = (function(global) {
         var playerTop = player.y + 50;
         var playerBottom = player.y + 120;
 
+        //creates a virtual rectangular box around the heart
+        if (heart) {
+        var heartLeft = heart.x + 20;
+        var heartRight = heart.x + 20;
+        var heartTop = heart.y + 20;
+        var heartBottom = heart.y + 20; 
+      };
+
     allEnemies.forEach(function(enemy) {
         // creates a virtual rectangular box around the enemies
         var enemyLeft = enemy.x + 2;
@@ -110,7 +125,7 @@ var Engine = (function(global) {
         var enemyTop = enemy.y + 70;
         var enemyBottom = enemy.y + 100;
 
-        // when the two virtual box intersect we have the collision
+        // when the two virtual box  ENEMY-PLAYER intersect we have the collision
         if ( enemyRight > playerLeft && enemyLeft < playerRight && enemyBottom > playerTop && enemyTop < playerBottom) {
             if (lifePoints >1 ) {
             // The "oops!" message appears on the screen / An overlay is showns and then it disappears
@@ -126,7 +141,12 @@ var Engine = (function(global) {
             lifePointsMinus();
         };
     });
-    }
+      // when the two virtual box  HEART-PLAYER intersect we have the collision, and the player gains one life point 
+      if ( heartRight > playerLeft && heartLeft < playerRight && heartBottom > playerTop && heartTop < playerBottom) {
+        lifePointsPlus();
+        heart = null;
+      }; 
+  }
 
     /* This is called by the update function and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls
@@ -203,6 +223,10 @@ var Engine = (function(global) {
         if (heart) {
             heart.render();
         };
+
+        allGems.forEach(function(gem) {
+          gem.render();
+        });
     }
 
     /* This function reset the game. It is 
@@ -234,7 +258,8 @@ var Engine = (function(global) {
         'images/char-princess-girl.png',
         //collectables
         'images/Rock.png', // it stops the character
-        'images/Heart.png' // gives life points
+        'images/Heart.png', // gives life points
+        'images/Gem-Orange.png' // orange gem worth 50 points
     ]);
 
     // This function creates a div block containing all the characters the player can choose 
