@@ -116,7 +116,9 @@ var Engine = (function(global) {
         var heartRight = heart.x + 20;
         var heartTop = heart.y + 20;
         var heartBottom = heart.y + 20; 
-      };
+        };
+
+
 
     allEnemies.forEach(function(enemy) {
         // creates a virtual rectangular box around the enemies
@@ -141,12 +143,35 @@ var Engine = (function(global) {
             lifePointsMinus();
         };
     });
+
+
       // when the two virtual box  HEART-PLAYER intersect we have the collision, and the player gains one life point 
       if ( heartRight > playerLeft && heartLeft < playerRight && heartBottom > playerTop && heartTop < playerBottom) {
         lifePointsPlus();
         heart = null;
       }; 
+
+
+        allGems.forEach(function(gem) {
+        //creates a virtual rectangular box around the gems
+        var gemLeft = gem.x + 20;
+        var gemRight = gem.x + 20;
+        var gemTop = gem.y + 20;
+        var gemBottom = gem.y + 20; 
+
+        // gem value
+        var idxGem = allGems.indexOf(gem);
+
+        if ( gemRight > playerLeft && gemLeft < playerRight && gemBottom > playerTop && gemTop < playerBottom) {
+        pointScore += allGems[idxGem].worth;
+        points.innerHTML = pointScore;
+        allGems.splice(idxGem, 1);
+        }; 
+
+      }); 
   }
+
+
 
     /* This is called by the update function and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls

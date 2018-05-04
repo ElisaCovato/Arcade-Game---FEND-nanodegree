@@ -155,7 +155,7 @@ var Gem = function(x, y) {
 
 // Draw the Gem on screen.
 Gem.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 65.65, 111.15);
 };
 
 //Changing color/score for a gem.
@@ -205,21 +205,15 @@ function gemsDraw() {
     if (levelScore > 2) {
         var rand1X = randomCordX();
         var rand1Y = randomCordY();
-        allGems.push(new Gem(rand1X, rand1Y));
-        // if (levelScore > 7) {
-        //     allGems.push(new Gem(randomCordX(), randomCordY() ) );
-        //     if (levelScore>9) {
-        //         allGems.push(new Gem(randomCordX(), randomCordY() ) );
-        //     };
-        // };
+        allGems.push(new Gem(rand1X, rand1Y+90));
     };
 }
 
 
 function heartsDraw () {
     if (levelScore%3===0) {
-        var heartX = randomCordX;
-        var heartY = randomCordY;
+        var heartX = randomCordX();
+        var heartY = randomCordY();
         heart = new Heart(heartX,heartY);
     } else {
         heart = null;
@@ -285,6 +279,7 @@ function levelUp() {
         heartsDraw();
 
         // Generates gems on screen
+        allGems = [];
         gemsDraw();
 
         // the enemies got an increased in their speed
