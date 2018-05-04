@@ -154,10 +154,10 @@ var Engine = (function(global) {
 
         allGems.forEach(function(gem) {
         //creates a virtual rectangular box around the gems
-        var gemLeft = gem.x + 20;
-        var gemRight = gem.x + 20;
-        var gemTop = gem.y + 20;
-        var gemBottom = gem.y + 20; 
+        var gemLeft = gem.x + 40;
+        var gemRight = gem.x + 40;
+        var gemTop = gem.y + 40;
+        var gemBottom = gem.y + 40; 
 
         // gem value
         var idxGem = allGems.indexOf(gem);
@@ -284,7 +284,9 @@ var Engine = (function(global) {
         //collectables
         'images/Rock.png', // it stops the character
         'images/Heart.png', // gives life points
-        'images/Gem-Orange.png' // orange gem worth 50 points
+        'images/Gem-Orange.png', // orange gem worth 50 points
+        'images/Gem-Blue.png', // blue gem worth 10 points
+        'images/Gem-Green.png' // green gem worth 30 points
     ]);
 
     // This function creates a div block containing all the characters the player can choose 

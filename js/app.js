@@ -148,9 +148,7 @@ Gems
 var Gem = function(x, y) {
     this.x = x;
     this.y = y;
-    this.sprite = 'images/Gem-Orange.png';
-    this.gemColor = 1; //orange-gold
-    this.worth = 50; // score 
+    this.randomGem();
 };
 
 // Draw the Gem on screen.
@@ -158,20 +156,23 @@ Gem.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 65.65, 111.15);
 };
 
-//Changing color/score for a gem.
-// Gem.prototype.changeColor = function() {
-//     if (this.gemColor === 1) {
-//         this.sprite = 'images/Gem-Green.png';
-//         this.gemColor = 2; // green
-//         this.worth = 30;
-//     }
-//     else {
-//         this.sprite = 'images/Gem-Blue.png';
-//         this.gemColor = 3; // blue
-//         this.worth = 10;
-//     }
-// };
+//Randomly generates a different color for the gem with corrispective point value
+Gem.prototype.randomGem = function(){
+    var randIdx = Math.floor(Math.random() * 3);
 
+    if (randIdx === 0) {
+        this.sprite = 'images/Gem-Blue.png';
+        this.worth = 10;
+    }else {
+        if (randIdx === 1) {
+            this.sprite = 'images/Gem-Green.png';
+            this.worth = 30;
+        }else {
+            this.sprite = 'images/Gem-Orange.png';
+            this.worth = 50;
+        }
+    }
+};
 
 
 
@@ -202,10 +203,20 @@ function randomCordY() {
 
 
 function gemsDraw() {
-    if (levelScore > 2) {
-        var rand1X = randomCordX();
-        var rand1Y = randomCordY();
-        allGems.push(new Gem(rand1X, rand1Y+90));
+    var randX = [];
+    var randY = [];
+    for (var i=0; i<3; i++) {
+        randX.push(randomCordX());
+        randY.push(randomCordY());
+    }
+    if (levelScore > 1) {
+        allGems.push(new Gem(randX[0], randY[0]+90));
+        if (levelScore > 6) {
+            allGems.push(new Gem(randX[1], randY[1]+90));
+        };
+        if (levelScore > 9) {
+            allGems.push(new Gem(randX[2], randY[2]+90));
+        };
     };
 }
 
