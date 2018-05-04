@@ -71,23 +71,28 @@ Player.prototype.render = function() {
 
 // this fucntion handles the input method : pressind the arrows on the keyboard the player can move the character on the screen
 Player.prototype.handleInput = function(allowedKeys) {
+    this.moveX=0;
+    this.moveY=0;
     switch (allowedKeys) {
         case "left":
             //check for wall, otherwise move left
             if (this.x > 0) {
                 this.x -= 50;
+                this.moveX = -50;
             }
             break;
         case "right":
             //check for wall, otherwise move right
             if (this.x < 400) {
                 this.x += 50;
+                this.moveX = 50;
             }
             break;
         case "up":
             //check if player reached top of water, if yes then restarts, otherwise keeps going
             if (this.y > 0) {
                 this.y -= 50;
+                this.moveY = -50;
             } else {
                 levelUp();
                 player.x = 200; 
@@ -98,6 +103,7 @@ Player.prototype.handleInput = function(allowedKeys) {
             //check for bottom, otherwise move down
             if (this.y < 400) {
                 this.y += 50;
+                this.moveY = 50; 
             }
             break;
     }
@@ -153,7 +159,7 @@ var Gem = function(x, y) {
 
 // Draw the Gem on screen.
 Gem.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 65.65, 111.15);
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 60.60, 102.6);
 };
 
 //Randomly generates a different color for the gem with corrispective point value
@@ -179,6 +185,26 @@ Gem.prototype.randomGem = function(){
 /*****************************************************************************************************************/
 
 /*
+Rock
+*/
+var Rock = function(x, y) {
+    this.x = x;
+    this.y = y;
+    this.sprite = 'images/Rock.png'
+};
+
+// Draw the Gem on screen.
+Rock.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+
+
+
+
+/*****************************************************************************************************************/
+
+/*
 Instantiate objects
 */
 
@@ -189,6 +215,8 @@ var allEnemies = [];
 var allGems = [];
 
 var heart; 
+
+var allRocks=[]; 
 
 // this function generates a random x position
 function randomCordX() {
@@ -209,12 +237,13 @@ function gemsDraw() {
         randX.push(randomCordX());
         randY.push(randomCordY());
     }
+    // Levels 2,3,4,5 have one gem, levels 6,7,8 have 2 gems, levels 9 and 10 have 3 gems
     if (levelScore > 1) {
         allGems.push(new Gem(randX[0], randY[0]+90));
-        if (levelScore > 6) {
+        if (levelScore > 5) {
             allGems.push(new Gem(randX[1], randY[1]+90));
         };
-        if (levelScore > 9) {
+        if (levelScore > 8) {
             allGems.push(new Gem(randX[2], randY[2]+90));
         };
     };
@@ -231,6 +260,22 @@ function heartsDraw () {
     };
 }
 
+
+function rocksDraw() {
+    var randRockX = [];
+    var randRockY = [];
+    for (var i=0; i<2; i++) {
+        randRockX.push(randomCordX()-100);
+        randRockY.push(randomCordY()-100);
+    }; 
+    // In levels 7, 8 and 9 there is one rock, on level 10 there are 2 rocks
+    if (levelScore > 6) {
+        allRocks.push(new Rock(randRockX[1]-15, randRockY[1]+55));
+        if (levelScore === 10) {
+            allRocks.push(new Rock(randRockX[1]-15, randRockY[1]+55));
+        };
+    };
+}
 
 
 
@@ -292,6 +337,10 @@ function levelUp() {
         // Generates gems on screen
         allGems = [];
         gemsDraw();
+
+        // Generates rocks on the screen
+        allRocks = [];
+        rocksDraw();
 
         // the enemies got an increased in their speed
         speedMultiplier += 7;

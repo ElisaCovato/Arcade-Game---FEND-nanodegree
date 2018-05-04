@@ -167,8 +167,24 @@ var Engine = (function(global) {
         points.innerHTML = pointScore;
         allGems.splice(idxGem, 1);
         }; 
+      });
 
-      }); 
+        allRocks.forEach(function(rock) {
+        //creates a virtual rectangular box around the rocks
+        var rockLeft = rock.x + 2;
+        var rockRight = rock.x+90;
+        var rockTop = rock.y+70;
+        var rockBottom = rock.y+100; 
+
+      // if the player collides with a rock then the player cannot move. we bring it to its position given the 
+      // impression that it is not moving
+        if ( rockRight > playerLeft && rockLeft < playerRight && rockBottom > playerTop && rockTop < playerBottom) {
+
+          player.x = player.x-player.moveX;
+          player.y = player.y-player.moveY;
+        }; 
+      });
+
   }
 
 
@@ -239,11 +255,6 @@ var Engine = (function(global) {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
-        allEnemies.forEach(function(enemy) {
-            enemy.render();
-        });
-
-        player.render();
 
         if (heart) {
             heart.render();
@@ -252,6 +263,16 @@ var Engine = (function(global) {
         allGems.forEach(function(gem) {
           gem.render();
         });
+
+        allRocks.forEach(function(rock) {
+          rock.render();
+        });
+
+        allEnemies.forEach(function(enemy) {
+            enemy.render();
+        });
+
+        player.render();
     }
 
     /* This function reset the game. It is 
@@ -286,7 +307,9 @@ var Engine = (function(global) {
         'images/Heart.png', // gives life points
         'images/Gem-Orange.png', // orange gem worth 50 points
         'images/Gem-Blue.png', // blue gem worth 10 points
-        'images/Gem-Green.png' // green gem worth 30 points
+        'images/Gem-Green.png', // green gem worth 30 points
+        // rock
+        'images/Rock.png' // the rock stops the player, the player can go on the tile occupaied by a rock
     ]);
 
     // This function creates a div block containing all the characters the player can choose 
