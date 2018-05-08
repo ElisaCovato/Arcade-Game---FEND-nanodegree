@@ -116,7 +116,7 @@ var Engine = (function(global) {
         if (lifePoints > 1) {
           // The "oops!" message appears on the screen / An overlay is showns and then it disappears
           onOverlay(overlayCollisions);
-          setInterval(function() {
+          setTimeout(function() {
             offOverlay(overlayCollisions);
           }, 1000);
           // The player start again from the initial position

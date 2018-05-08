@@ -306,7 +306,7 @@ function levelUp() {
         levels.innerHTML = levelScore;
         // the "great!" overlay appears
         onOverlay(overlayLevelUp);
-        setInterval(function() {
+        setTimeout(function() {
             offOverlay(overlayLevelUp);
         }, 900);
         // we increment the points
