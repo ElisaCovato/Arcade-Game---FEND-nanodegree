@@ -5,8 +5,8 @@ This game was built as part of the Udacity FEND nanodegree.
 
 ## How to Load the game
 
-- Clone the **[repo](ahttps://github.com/ElisaCovato/Arcade-game---FEND-nanodegree)** and open index.html -- or --
-- Play on GitHub.io: **[Arcade Game](https://elisacovato.github.io/Arcade-game---FEND-nanodegree/)**
+- Clone the **[repo](https://github.com/ElisaCovato/Arcade-Game---FEND-nanodegree.git)** and open index.html -- or --
+- Play on GitHub.io: **[Arcade Game](https://elisacovato.github.io/Arcade-Game---FEND-nanodegree/)**
 
 ## How the game works
 
@@ -16,6 +16,7 @@ In this game you have a Player and Enemies (Bugs). The goal of the player is to 
 ### Starting of the game 
 
 At the start of the game the player can choose the character to play with. The possible characters to choose from are shown below :
+
 ![boy](images/char-boy.png)
 ![cat-girl](images/char-cat-girl.png)
 ![horn-girl](images/char-horn-girl.png)
@@ -32,6 +33,7 @@ In some of the levels, the player will be able to collect life points and gems. 
 
 #### Life points
 ![Heart](images/Heart.png)
+
 Each heart collected increase of 1 the player life points. The player starts with 3 life points.
 
 #### Gems - extra points
@@ -43,6 +45,7 @@ The player can also collect gems of different colors. Each time the player colle
 
 #### Rock - obstacles
 ![Rock](images/Rock.png)
+
 The rocks block the way of the player. If a rock is on a tile the player cannot move on that tile. 
 
 ### Loosing the game - collision with enemies
