@@ -156,8 +156,8 @@ var Engine = (function(global) {
         //creates a virtual rectangular box around the gems
         var gemLeft = gem.x + 40;
         var gemRight = gem.x + 40;
-        var gemTop = gem.y + 40;
-        var gemBottom = gem.y + 40; 
+        var gemTop = gem.y + 60;
+        var gemBottom = gem.y + 70; 
 
         // gem value
         var idxGem = allGems.indexOf(gem);

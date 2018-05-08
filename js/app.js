@@ -207,6 +207,8 @@ Rock.prototype.render = function() {
 /*
 Instantiate objects
 */
+//Creates a matrix with all the coordinates of the canvas
+var cordinateMatrix = [];
 
 var player = new Player(200,400);
 
@@ -219,14 +221,24 @@ var heart;
 var allRocks=[]; 
 
 // this function generates a random x position
-function randomCordX() {
-    var cordX = 100*Math.floor(Math.random() * 5 )+18;
+function randomCordX(rand, randPlus) {
+    var cordX = 100*Math.floor(Math.random() * rand + randPlus )+18;
     return cordX;
 }
 // this function generates a random y position
-function randomCordY() {
-    var cordY = 100*Math.floor(Math.random() * 2+1 )-10;
+function randomCordY(rand, randPlus) {
+    var cordY = 100*Math.floor(Math.random() * rand+randPlus )-10;
     return cordY;
+}
+
+// this function checks if a position on the screen is already taken by a gem/rock/heart
+function isPositionTaken(array, item) {
+    for (var i = 0; i < array.length; i++) {
+        if (array[i][0] == item[0] && array[i][1] == item[1]) {
+            return true;   
+        }
+    }
+    return false;   
 }
 
 
@@ -234,8 +246,23 @@ function gemsDraw() {
     var randX = [];
     var randY = [];
     for (var i=0; i<3; i++) {
-        randX.push(randomCordX());
-        randY.push(randomCordY());
+        var gemXY = [randomCordX(5,0), randomCordY(2,1)];
+        if (!isPositionTaken(cordinateMatrix,gemXY)) {
+        randX.push(gemXY[0]);
+        randY.push(gemXY[1]);
+        cordinateMatrix.push(gemXY);             
+    } else {
+        i--;
+    }
+        /*var gemX = randomCordX(5,0);
+        var gemY = randomCordY(2,1)
+        if (cordinateMatrix.indexOf([gemX,gemY])==-1) {
+        randX.push(gemX);
+        randY.push(gemY);
+        cordinateMatrix.push([gemX,gemY]);            
+        } else {
+            i--;
+        }*/
     }
     // Levels 2,3,4,5 have one gem, levels 6,7,8 have 2 gems, levels 9 and 10 have 3 gems
     if (levelScore > 1) {
@@ -252,10 +279,28 @@ function gemsDraw() {
 
 function heartsDraw () {
     if (levelScore%3===0) {
-        var heartX = randomCordX();
-        var heartY = randomCordY();
+        var heartX, heartY;
+        for (var i=0; i<1; i++) {
+            var heartXY = [randomCordX(5,0), randomCordY(2,1)];
+        if (!isPositionTaken(cordinateMatrix,heartXY)) {
+        heartX = heartXY[0];
+        heartY = heartXY[1];
         heart = new Heart(heartX,heartY);
+        cordinateMatrix.push(heartXY);             
     } else {
+        i--;
+    }
+/*        var heartX = randomCordX(5,0);
+        var heartY = randomCordY(2,1);
+        if (cordinateMatrix.indexOf([heartX,heartY])==-1) {
+            heart = new Heart(heartX,heartY);
+            cordinateMatrix.push([heartX,heartY])
+        } else {
+            i--;
+        }*/
+    } 
+}
+    else {
         heart = null;
     };
 }
@@ -265,12 +310,18 @@ function rocksDraw() {
     var randRockX = [];
     var randRockY = [];
     for (var i=0; i<2; i++) {
-        randRockX.push(randomCordX()-100);
-        randRockY.push(randomCordY()-100);
+        var rockXY = [randomCordX(5,2), randomCordY(1,1)];
+        if (!isPositionTaken(cordinateMatrix,rockXY)) {
+        randRockX.push(rockXY[0]);
+        randRockY.push(rockXY[1]);
+        cordinateMatrix.push(rockXY);             
+    } else {
+        i--;
+    }
     }; 
     // In levels 7, 8 and 9 there is one rock, on level 10 there are 2 rocks
     if (levelScore > 6) {
-        allRocks.push(new Rock(randRockX[1]-15, randRockY[1]+55));
+        allRocks.push(new Rock(randRockX[0]-15, randRockY[0]+55));
         if (levelScore === 10) {
             allRocks.push(new Rock(randRockX[1]-15, randRockY[1]+55));
         };
@@ -330,6 +381,9 @@ function levelUp() {
         // we increment the points
         pointScore += levelUpPointsIncrement;
         points.innerHTML = pointScore;
+
+        // generates new coordinates
+        cordinateMatrix = [];
 
         // Generates hearts on screen
         heartsDraw();
