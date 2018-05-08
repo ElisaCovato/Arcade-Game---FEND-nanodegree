@@ -251,7 +251,7 @@ function rocksDraw() {
     var randRockX = [];
     var randRockY = [];
     for (var i = 0; i < 2; i++) {
-        var rockXY = [randomCordX(5, 2), randomCordY(1, 1)];
+        var rockXY = [randomCordX(5, 2)-200, randomCordY(2, 1)-100];
         if (!isPositionTaken(cordinateMatrix, rockXY)) {
             randRockX.push(rockXY[0]);
             randRockY.push(rockXY[1]);
@@ -312,8 +312,6 @@ function levelUp() {
         // we increment the points
         pointScore += levelUpPointsIncrement;
         points.innerHTML = pointScore;
-        // generates new coordinates
-        cordinateMatrix = [];
         // Generates hearts on screen
         heartsDraw();
         // Generates gems on screen
@@ -322,6 +320,8 @@ function levelUp() {
         // Generates rocks on the screen
         allRocks = [];
         rocksDraw();
+        // generates new coordinates
+        cordinateMatrix = [];
         // the enemies got an increased in their speed
         speedMultiplier += 7;
         allEnemies = [];
