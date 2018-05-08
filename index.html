@@ -3,60 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>Arcade game</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link href="css/style.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet prefetch">
-    <link href="https://fonts.googleapis.com/css?family=Coda" rel="stylesheet prefetch">
-    <!--     Animations by Animate.css: https://daneden.github.io/animate.css/ -->
+    <link href="https://fonts.googleapis.com/css?family=Coda" rel="stylesheet prefetch"><!--     Animations by Animate.css: https://daneden.github.io/animate.css/ -->
     <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css" rel="stylesheet">
 </head>
-</head>
-<body>
 
+<body>
     <!-- Score and title panel -->
-	<div class="container">
+    <div class="container">
         <!-- header -->
         <header>
             <h1>Arcade Game</h1>
-        </header><!-- score and restart panel -->
+        </header>
+        <!-- score and restart panel -->
         <section class="score-panel">
             <div>
                 <ul class="hearts">
                     <li><i class="fa fa-heart"></i></li>
                     <li><i class="fa fa-heart"></i></li>
                     <li><i class="fa fa-heart"></i></li>
-                </ul>
-                <span class="points"> 0</span> Points
-                <span class="levels"> 1</span> Level
+                </ul><span class="points">0</span> Points <span class="levels">1</span> Level
             </div>
             <div class="restart">
                 <i class="fa fa-repeat"></i> Restart
             </div>
+        </section>
     </div>
 
     <!-- Block of character that will appear in the starting modal -->
     <template class="characters">
-    	<button><img class="charElement" src="images/char-boy.png" alt="char-boy"></button>
-        <button><img class="charElement" src="images/char-cat-girl.png" alt="char-cat-girl"></button>
-        <button><img class="charElement" src="images/char-horn-girl.png" alt="char-horn-girl"></button>
-        <button><img class="charElement" src="images/char-pink-girl.png" alt="char-pink-girl"></button>
-        <button><img class="charElement" src="images/char-princess-girl.png" alt="char-princess-girl"></button>
+        <button><img alt="char-boy" class="charElement" src="images/char-boy.png"></button> <button><img alt="char-cat-girl" class="charElement" src="images/char-cat-girl.png"></button> <button><img alt="char-horn-girl" class="charElement" src="images/char-horn-girl.png"></button> <button><img alt="char-pink-girl" class="charElement" src="images/char-pink-girl.png"></button> <button><img alt="char-princess-girl" class="charElement" src="images/char-princess-girl.png"></button>
     </template>
 
     <!-- Overlay that appears when the characters collides with the enemies -->
     <div class="overlayCollisions">
-        <div class="overlayText">oops!</div>
-    </div>   
+        <div class="overlayText">
+            oops!
+        </div>
+    </div>
 
     <!-- Overlay that appears when the player levels up -->
     <div class="overlayLevelUp">
-        <div class="overlayTextUp">great!</div>
-    </div> 
+        <div class="overlayTextUp">
+            great!
+        </div>
+    </div>
 
-	<!--     Modal style by https://sweetalert.js.org/guides/#installation --> 
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    
-    <script src="js/resources.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/engine.js"></script>
+    <!--     Modal style by https://sweetalert.js.org/guides/#installation -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js">
+    </script> 
+    <script src="js/resources.js">
+    </script> 
+    <script src="js/app.js">
+    </script> 
+    <script src="js/engine.js">
+    </script>
 </body>
 </html>
