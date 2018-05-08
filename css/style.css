@@ -21,8 +21,6 @@ html {
     box-sizing: inherit;
 }
 
-
-
 html,
 body {
     width: 100%;
@@ -43,49 +41,55 @@ body {
     flex-direction: column;
 }
 
-
 /*
  * OVERLAYS
  */
- .overlayCollisions, .overlayLevelUp {
-    position: fixed; /* Sit on top of the page content */
-    display: none; /* Hidden by default */
-    width: 100%; /* Full width (cover the whole page) */
-    height: 100%; /* Full height (cover the whole page) */
-    top: 0; 
+
+.overlayCollisions,
+.overlayLevelUp {
+    position: fixed;
+    /* Sit on top of the page content */
+    display: none;
+    /* Hidden by default */
+    width: 100%;
+    /* Full width (cover the whole page) */
+    height: 100%;
+    /* Full height (cover the whole page) */
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 2; /* Srack order */
+    z-index: 2;
+    /* Srack order */
 }
 
-.overlayText, .overlayTextUp {
+.overlayText,
+.overlayTextUp {
     position: absolute;
     top: 50%;
     left: 50%;
     font-size: 100px;
-    transform: translate(-50%,-50%);
-    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
 }
 
 .overlayCollisions {
-    background-color: rgba(255,0,0,0.3); /* Red background with opacity */
+    background-color: rgba(255, 0, 0, 0.3);
+    /* Red background with opacity */
 }
 
 .overlayText {
-    color : red;
+    color: red;
 }
 
 .overlayLevelUp {
-    background-color: rgba(0, 255, 0, 0.3); /* Green background with opacity */
+    background-color: rgba(0, 255, 0, 0.3);
+    /* Green background with opacity */
 }
 
 .overlayTextUp {
-    color : green;
+    color: green;
 }
-
-
-
 
 /*
  * SCORE PANEL
@@ -96,7 +100,7 @@ body {
     width: 550px;
     margin-bottom: -40px;
     display: flex;
-    z-index:1;
+    z-index: 1;
     justify-content: space-between;
 }
 
@@ -115,17 +119,18 @@ body {
 }
 
 .points {
-    min-width: 2ch; 
+    min-width: 2ch;
     display: inline-block;
     text-align: right;
 }
 
 .levels {
-    min-width: 2ch; 
+    min-width: 2ch;
     display: inline-block;
     text-align: right;
     margin-left: 50px;
 }
+
 .restart {
     float: right;
     cursor: pointer;
@@ -144,6 +149,7 @@ MODALS
 */
 
 /*General modal style*/
+
 .swal-button--confirm {
     background-color: #02ccba;
 }
@@ -159,10 +165,11 @@ MODALS
 }
 
 /* Characters modal */
+
 button {
-	padding:0;
-	overflow: hidden;
-	background-color: white;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
     border: 0;
     margin-top: 15px;
     text-align: center;
@@ -172,11 +179,11 @@ button {
 }
 
 button:first-child {
-	margin-left: 0;
+    margin-left: 0;
 }
 
 button:hover {
-	background-color: LightGrey;
+    background-color: LightGrey;
 }
 
 button:focus {
@@ -184,23 +191,22 @@ button:focus {
 }
 
 .charElement {
-	cursor: pointer;
-	margin-top: -40px;
-	/*margin-bottom: -20px;*/
+    cursor: pointer;
+    margin-top: -40px;
 }
 
 .charSelected {
-	background-image: url('../images/Selector.png'); 
+    background-image: url('../images/Selector.png');
 }
 
 /*Game over modal*/
-.gameOverText .swal-title {
-        color : #f27474 !important;
 
+.gameOverText .swal-title {
+    color: #f27474 !important;
 }
 
 /*Winning modal*/
-.winningText .swal-title {
-        color : #02ccba !important;
 
+.winningText .swal-title {
+    color: #02ccba !important;
 }
